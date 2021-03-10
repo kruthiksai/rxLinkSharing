@@ -1,0 +1,49 @@
+.margin10px{
+    margin-top: 10px
+}
+
+.recentcontent{
+    padding-left: 0px; padding-right:0px;
+}
+
+.viewrecentpost{
+    bottom:0px; right:0px; position:absolute;
+}
+
+
+.registerbutton{
+
+    margin: 20px auto 20px auto;
+    width: 50%;
+    padding: 10px;
+    display: block;
+
+}
+
+
+.collapse.navbar-collapse{
+    flex-grow: 0 ;
+    float:right;
+
+
+}
+.nav-item {
+    margin-right: 3%;
+}
+
+.dropdown-menu.home-dropdown {
+    margin-top: 5px;
+    right: 0;
+    left: initial;
+    margin-right: auto !important;
+}
+.navicons{
+    width: 1rem;
+}
+.usericon{
+    margin-right: 0.5rem;
+}
+
+.post_textsize{
+    font-size: 14px;
+}
