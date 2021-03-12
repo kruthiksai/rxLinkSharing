@@ -38,4 +38,17 @@
 
 
         }
+
+        def updateprofile(def params,long id){
+            User user=User.get(id);
+            user.userName=params.userName;
+            user.firstName=params.firstName;
+            user.lastName=params.lastName;
+            user.email=params.email;
+            if(user.validate()){
+                user.save(flush:true);
+            }
+
+
+        }
     }

@@ -41,6 +41,9 @@
         </div>
         <!--Authentication -->
         <div class=" col-sm-4 margin10px">
+
+
+            <div class="message" style="display: block">${flash.message}</div>
             <div class="card">
                 <div class="card-header">Login</div>
 

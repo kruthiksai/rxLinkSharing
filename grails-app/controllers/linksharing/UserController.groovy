@@ -41,18 +41,35 @@ class UserController {
             redirect action: 'index', controller: 'dashboard'
         } else {
             print("false")
-            render(view: '../index')
+//            render(view: '../index')
+
+                flash.message = "Login Failed"
+
+
+              //  flash.error = "could not delete object"
+
+
+            redirect action: 'index', controller: 'user'
         }
 
 
     }
 
     def openprofile() {
-        redirect(controller: 'user', action: 'updateprofile ')
+      render(view:'profile',model:[userdetails:session.user] )
     }
 
-    def updateprofile() {
-        render(view: 'profile')
+    def updateprofile(UserCO userCO) {
+        if(userCO.validate()){
+          User user=  userService.updateprofile(params,session.user.id)
+            flash.message = "Profile Updated"
+            session.user=user;
+        }else{
+            print("update failed")
+            flash.message = "Update Failed please enter all fields"
+        }
+
+        redirect action: 'openprofile'
 
     }
 

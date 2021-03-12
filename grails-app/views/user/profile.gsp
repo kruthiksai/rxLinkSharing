@@ -45,36 +45,42 @@
                 <div class="card-header">Login</div>
 
                 <div class="card-body">
-                    <g:form url="[controller: 'user', action: 'updateuser']" method="post">
+                    <g:form action="updateprofile" method="post">
                         <div class="form-group">
                             <label for="firstname">First Name</label>
                             <input type="text" name="firstName" class="form-control" id="firstname"
-                                   placeholder="kruthik">
+                                  value="${userdetails.firstName}">
                         </div>
 
                         <div class="form-group">
                             <label for="lastname">Last Name</label>
-                            <input type="text" name="lastName" class="form-control" id="lastname" placeholder="sai">
+                            <input type="text" name="lastName" class="form-control" id="lastname"    value="${userdetails.lastName}">
                         </div>
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" name="userName" class="form-control" id="username" placeholder="kk1611">
+                            <input type="text" name="userName" class="form-control" id="username"    value="${userdetails.userName}">
                         </div>
                         <div class="form-group ">
                             <label for="inputEmail4">Email</label>
                             <input type="email" name="email" class="form-control" id="inputEmail4"
-                                   placeholder="Email">
+                                   value="${userdetails.email}">
+                        </div>
+                        <div class="form-group ">
+                            <label for="selectimage">Select Image</label>
+                            <input type="file" name="photo" class="form-control" id="selectimage">
                         </div>
 
-                        <g:actionSubmit value="updateuser" class="btn btn-primary" >update user details</g:actionSubmit>
+                        <g:actionSubmit value="updateprofile" class="btn btn-primary" >update user details</g:actionSubmit>
                     </g:form>
+
+                    <div class="message" style="display: block">${flash.message}</div>
                 </div>
             </div>
 
 
             <button class="btn btn-primary registerbutton" stypetype="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                Register
+                Change Password
             </button>
 
             <div class="collapse" id="collapseExample">
@@ -100,7 +106,7 @@
 
 
 
-                        <g:actionSubmit value="adduser" class="btn btn-primary">Sign in</g:actionSubmit>
+                        <g:actionSubmit value="changepassword" class="btn btn-primary">Sign in</g:actionSubmit>
                     </g:form>
                 </div>
             </div>
