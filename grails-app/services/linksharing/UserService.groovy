@@ -39,12 +39,13 @@
 
         }
 
-        def updateprofile(def params,long id){
+        def updateprofile(def params,long id,String photourl){
             User user=User.get(id);
             user.userName=params.userName;
             user.firstName=params.firstName;
             user.lastName=params.lastName;
             user.email=params.email;
+            user.photoUrl=photourl;
             if(user.validate()){
                 user.save(flush:true);
             }

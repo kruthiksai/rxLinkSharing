@@ -385,96 +385,100 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Invite</button>
+            </cannot change css with this in jquerydiv>
             </div>
         </div>
     </div>
-</div>
 
-%{--create topic--}%
+    %{--create topic--}%
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createtopic">
-    Create topic
-</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createtopic">
+        Create topic
+    </button>
 
-<div class="modal fade" id="createtopic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createtopiclabel">Create Topic</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal fade" id="createtopic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createtopiclabel">Create Topic</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <g:form method="post">
+                        <div class="form-group">
+                            <label for="topicname">Topic Name</label>
+                            <input type="text" name="name" class="form-control" id="topicname" placeholder="@grails">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="topictype">Select Topic</label>
+                            <select class="form-control" name="topicShow" id="topictype">
+                                <option>private</option>
+                                <option>public</option>
+
+                            </select>
+                        </div>
+
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <g:actionSubmit action="addtopic" value="Add Topic" class="btn btn-primary"/>
+                    </g:form>
+                </div>
+
             </div>
-
-            <div class="modal-body">
-                <g:form method="post">
-                    <div class="form-group">
-                        <label for="topicname">Topic Name</label>
-                        <input type="text" name="name" class="form-control" id="topicname" placeholder="@grails">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="topictype">Select Topic</label>
-                        <select class="form-control" name="topicShow" id="topictype">
-                            <option>private</option>
-                            <option>public</option>
-
-                        </select>
-                    </div>
-
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <g:actionSubmit action="addtopic" value="Add Topic" class="btn btn-primary"/>
-                </g:form>
-            </div>
-
         </div>
     </div>
-</div>
 
 
 
 
 
-<!--bootstrap code-->
-%{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"--}%
-%{--        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"--}%
-%{--        crossorigin="anonymous"></script>--}%
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
-        integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
-        integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
-        crossorigin="anonymous"></script>
+    <!--bootstrap code-->
+    %{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"--}%
+    %{--        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"--}%
+    %{--        crossorigin="anonymous"></script>--}%
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
+            integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+            integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
+            crossorigin="anonymous"></script>
 
-<g:javascript>
+
+
+    <g:javascript>
 $(document).ready(function (){
-alert("loading")
-    $(".subscribe,unsubscribe").click(function (e){
+
+    $(".subscribe,unsubscribe").click(function (){
 
 
-
-       var result= subscribe(this.id,e)
-            console.log($(this).html())
-       //     $(this).closest(".recentcontent").find(".itemslist").remove();
+        var elementContext=this
+        subscribe(elementContext)
+         //   console.log($(this).html())
+       //
 
     })
 
 })
 
-        function subscribe(id,e){
+        function subscribe(element){
 
     var data={
      userid: ${session.user?.id},
-     topicid:id
+     topicid:element.id
 
     }
 
-
-
     $.ajax({
               url: "http://localhost:8080/dashboard/subscribetopic",
+
                data: data,
                async:false,
                success: function (result) {
               console.log(result)
+                console.log(data.topicid + " "+data.userid)
+            //   $(element).innerHTML
+            $(element).closest(".recentcontent").find(".itemslist").remove();
               },
                error: function () {
                  alert("no user found")
@@ -483,7 +487,7 @@ alert("loading")
 
         }
 
-</g:javascript>
+    </g:javascript>
 </body>
 
 </html>

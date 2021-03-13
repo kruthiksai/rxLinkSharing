@@ -2,6 +2,10 @@ package linksharing
 
 import linksharingCO.UserCO
 import linksharingdomain.User
+import javax.imageio.ImageIO
+
+import java.awt.image.BufferedImage
+
 import static org.springframework.http.HttpStatus.*
 
 class UserController {
@@ -61,7 +65,17 @@ class UserController {
 
     def updateprofile(UserCO userCO) {
         if(userCO.validate()){
-          User user=  userService.updateprofile(params,session.user.id)
+            userCO.photoUrl="displayphotos/${userCO.userName}.jpeg"
+
+            String fname="displayphotos/${userCO.userName}.jpeg";
+            print(params.photo)
+            ByteArrayInputStream bis = new ByteArrayInputStream(params.photo.getBytes());
+            BufferedImage bImage2 = ImageIO.read(bis);
+            ImageIO.write(bImage2, "jpeg", new File("/home/jayaram-kruthik/grailsws/rxLinkSharing-master/grails-app/assets/images/displayphotos/${userCO.userName}.jpeg"));
+
+
+            User user=  userService.updateprofile(params,session.user.id,userCO.photoUrl);
+            session.user.photoUrl="displayphotos/${userCO.userName}.jpeg";
             flash.message = "Profile Updated"
             session.user=user;
         }else{

@@ -34,6 +34,42 @@
     <div class="row">
         <div class="col-sm-8 margin10px">
 
+            <div class="card ">
+                <div class="card-body" style="position: relative;">
+                    <div class="container-fluid recentcontent">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <g:img class="card-img-top" dir="images" file="${session.user.photoUrl}"  alt="Card image"/>
+                            </div>
+
+                            <div class="col-sm-8" style="position: relative;">
+                                <h4 class="card-title">${session.user?.firstName} ${session.user?.lastName}</h4>
+                                <h6 class="card-title">@${session.user?.userName}</h6>
+
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <strong>Subscriptions</strong>
+
+                                        <p>
+                                            50
+                                        </p>
+                                    </div>
+
+                                    <div class="col-sm-5">
+                                        <strong>Topics</strong>
+
+                                        <p>
+                                            50
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <g:render template="/templates/RecentShares"></g:render>
             <!-- recent posts -->
             <g:render template="/templates/TopPosts" model="[trendingTopics: trendingTopics]"></g:render>
@@ -45,7 +81,7 @@
                 <div class="card-header">Login</div>
 
                 <div class="card-body">
-                    <g:form action="updateprofile" method="post">
+                    <g:form controller="user" action="updateprofile" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="firstname">First Name</label>
                             <input type="text" name="firstName" class="form-control" id="firstname"
