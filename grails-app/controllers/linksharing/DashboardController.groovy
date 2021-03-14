@@ -1,5 +1,6 @@
 package linksharing
 
+import grails.converters.JSON
 import linksharingCO.TopicCO
 import linksharingdomain.Subscription
 import linksharingdomain.Topic
@@ -9,7 +10,7 @@ class DashboardController {
     TopicsService topicsService;
 
     def index() {
-        render(view: 'home', model: [trendingTopics: topicsService.trendingTopics(),trendingTopics: topicsService.trendingTopics()])
+        render(view: 'home', model: [trendingTopics: topicsService.trendingTopics(), trendingTopics: topicsService.trendingTopics()])
     }
 
     def addtopic(TopicCO topicCO) {
@@ -29,20 +30,41 @@ class DashboardController {
 
 
     }
-    def subscribetopic(){
+
+    def subscribetopic() {
+
+        User u=  User.get(params.userid.toLong());
+        Topic t =Topic.get(params.topicid.toLong())
+        Subscription sub = Subscription.findByTopicAndUser(t,u);
+
+        if (sub) {
+
+            if(! topicsService.unSubscribeToTopic(params.userid.toLong(), params.topicid.toLong())){
+                render "deleted"
+            }
 
 
-        Subscription s=topicsService.supbscribeToTopic(params.userid.toLong(),params.topicid.toLong());
-        if(s){
+        } else {
+            Subscription s =  topicsService.supbscribeToTopic(params.userid.toLong(), params.topicid.toLong());
 
-
-            render "kruthik"
-        }else{
-            print("failed")
-            render "failed"
+            if (s) {
+                render "success"
+            } else {
+                print("failed")
+                render "failed"
+            }
         }
 
 
+    }
+
+    def gettrendingtopics() {
+        render(topicsService.trendingTopics() as JSON)
 
     }
+    def fetchTopics(){
+
+        render (topicsService.fetchTopics() as JSON)
+    }
+
 }

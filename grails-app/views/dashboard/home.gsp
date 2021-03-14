@@ -35,7 +35,7 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="#"><i class="fa fa-comments fa-lg"
+                    <a class="nav-link " aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#createtopic"><i class="fa fa-comments fa-lg"
                                                                          aria-hidden="true"></i></a>
                 </li>
                 <li class="nav-item">
@@ -269,7 +269,10 @@
                         <button type="button" class="btn-sm btn-outline-dark">view all</button>
                     </span>
                 </div>
-                <g:render template="/templates/subscriptionDetails"></g:render>
+                %{--                <g:render template="/templates/subscriptionDetails"></g:render>--}%
+                <div id="recenttopics">
+
+                </div>
             </div>
             <!-- recent posts -->
             <div class="card margin10px">
@@ -349,6 +352,7 @@
         </div>
     </div>
 </div>
+
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Launch demo modal
 </button>
@@ -385,87 +389,128 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Invite</button>
-            </cannot change css with this in jquerydiv>
-            </div>
-        </div>
-    </div>
 
-    %{--create topic--}%
-
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createtopic">
-        Create topic
-    </button>
-
-    <div class="modal fade" id="createtopic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createtopiclabel">Create Topic</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <g:form method="post">
-                        <div class="form-group">
-                            <label for="topicname">Topic Name</label>
-                            <input type="text" name="name" class="form-control" id="topicname" placeholder="@grails">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="topictype">Select Topic</label>
-                            <select class="form-control" name="topicShow" id="topictype">
-                                <option>private</option>
-                                <option>public</option>
-
-                            </select>
-                        </div>
-
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <g:actionSubmit action="addtopic" value="Add Topic" class="btn btn-primary"/>
-                    </g:form>
-                </div>
 
             </div>
         </div>
     </div>
+</div>
+%{--create topic--}%
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createtopic">
+    Create topic
+</button>
+
+<div class="modal fade" id="createtopic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createtopiclabel">Create Topic</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <g:form method="post">
+                    <div class="form-group">
+                        <label for="topicname">Topic Name</label>
+                        <input type="text" name="name" class="form-control" id="topicname" placeholder="@grails">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="topictype">Select Topic</label>
+                        <select class="form-control" name="topicShow" id="topictype">
+                            <option>private</option>
+                            <option>public</option>
+
+                        </select>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <g:actionSubmit action="addtopic" value="Add Topic" class="btn btn-primary"/>
+                </g:form>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
 
 
 
-    <!--bootstrap code-->
-    %{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"--}%
-    %{--        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"--}%
-    %{--        crossorigin="anonymous"></script>--}%
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
-            integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
-            integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
-            crossorigin="anonymous"></script>
+<!--bootstrap code-->
+%{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"--}%
+%{--        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"--}%
+%{--        crossorigin="anonymous"></script>--}%
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
+        integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+        integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
+        crossorigin="anonymous"></script>
 
 
 
-    <g:javascript>
+<g:javascript>
+
 $(document).ready(function (){
 
+
+populateSubs();
     $(".subscribe,unsubscribe").click(function (){
-
-
         var elementContext=this
         subscribe(elementContext)
-         //   console.log($(this).html())
-       //
 
     })
 
 })
+// function to show subscribed topics
+function populateSubs(){
 
+
+
+        $.ajax({
+              url: "http://localhost:8080/dashboard/gettrendingtopics",
+
+            //   data: data,
+               async:false,
+               success: function (result) {
+                  console.log(result)
+                for (i = 0; i < result.length; i++) {
+                    var topicId=result[i]["id"];
+                     var subsHtml='<div class="card"> <div class="card-body" style="position: relative;"> <div class="container-fluid recentcontent" id ='
+                     +topicId+
+                     '> <div class="row"> <div class="col-sm-3"> <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image"> </div><div class="col-sm-9" style="position: relative;"> <a class="card-text">' +
+                      result[i]["name"] +
+                       '</a> <div class="row"> <div class="col-sm-4"> <strong class="card-text post_textsize">' + '</strong> <a  class="card-text post_textsize subscribe">Subscribe</a> </div><div class="col-sm-5"> <strong class="post_textsize">Subscriptions</strong> <p> 50 </p></div><div class="col-sm-3"> <strong class="post_textsize">post</strong> <p> 50 </p></div></div></div></div><div class="row itemslist"> <div class="col-sm-4"> <select class="form-select" aria-label="Default select example"> <option selected>Serious</option> <option value="1">Not Serious</option> </select> </div>' ;
+                     if(${session.user.id}!=result[i]["user"]["id"]){
+                         subsHtml+='<div class="col-sm-4 "> <select class="form-select" aria-label="Default select example"> <option selected>private</option> <option value="1">public</option> </select> </div><div class="col-sm-4"> <div class="row"> <div class="col-sm-4"> <i class="fa fa-edit fa-lg" aria-hidden="true"></i> </div><div class="col-sm-4"> <i class="fa fa-trash fa-lg" aria-hidden="true"></i> </div>'
+                        }
+
+                        subsHtml+=  '<div class="col-sm-4"> <i class="fa fa-envelope fa-lg" aria-hidden="true"></i> </div></div></div></div></div></div></div>'
+
+                   console.log()
+
+                      $("#recenttopics").append(subsHtml);
+                }
+
+
+            //   $(element).innerHTML
+       //     $(element).closest(".recentcontent").find(".itemslist").remove();
+              },
+               error: function () {
+                 alert("no user found")
+                }
+                 });
+}
+
+
+// function to  subscribe topics
         function subscribe(element){
 
     var data={
      userid: ${session.user?.id},
-     topicid:element.id
+     topicid: $(element).closest(".recentcontent").attr('id')
 
     }
 
@@ -478,7 +523,15 @@ $(document).ready(function (){
               console.log(result)
                 console.log(data.topicid + " "+data.userid)
             //   $(element).innerHTML
-            $(element).closest(".recentcontent").find(".itemslist").remove();
+            if(result=="success"){
+                $(element).closest(".recentcontent").find(".itemslist").show();
+                $(element).text("unsubscribe")
+            }
+            if(result=="deleted"){
+                 $(element).closest(".recentcontent").find(".itemslist").hide();
+                   $(element).text("subscribe")
+            }
+
               },
                error: function () {
                  alert("no user found")
@@ -487,7 +540,7 @@ $(document).ready(function (){
 
         }
 
-    </g:javascript>
+</g:javascript>
 </body>
 
 </html>

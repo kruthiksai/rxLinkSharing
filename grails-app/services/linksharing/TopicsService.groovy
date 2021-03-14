@@ -35,17 +35,46 @@ class TopicsService {
 
         User u=  User.get(uid);
         Topic t =Topic.get(tid)
-        println(u.properties);
-        println(t.properties);
-        Subscription s=new Subscription(seriousness:true,user:u,topic:t);
-        if(s.validate()){
-            print("kruthik")
-            s.save(flush:true,failOnError:true);
-            return s;
+//        println(u.properties);
+//        println(t.properties);
+//        Subscription sub=Subscription.findByTopicAndUser(t,u);
+//        if(sub){
+//         //   print("present");
+//
+//            return "deleted";
+//        }
 
-        }else{
-            return  null;
-        }
+            Subscription s=new Subscription(seriousness:true,user:u,topic:t);
+            if(s.validate()){
+               // print("kruthik")
+                s.save(flush:true,failOnError:true);
+                return s;
 
+            }else{
+                return  null;
+            }
+
+
+
+    }
+
+    def unSubscribeToTopic(long uid,long tid){
+
+        User u=  User.get(uid);
+        Topic t =Topic.get(tid)
+        Subscription sub=Subscription.findByTopicAndUser(t,u);
+       return Subscription.deleteAll(sub)
+    }
+
+    def fetchTopics(){
+      User u=User.findById(2)
+       def kk=Topic.createCriteria().list {
+           subscription{
+               eq('user',u);
+
+           }
+       }
+
+        return kk;
     }
 }
