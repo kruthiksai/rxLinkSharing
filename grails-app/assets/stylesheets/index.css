@@ -7,7 +7,11 @@
 }
 
 .viewrecentpost{
+    font-size: 15px;
     bottom:0px; right:0px; position:absolute;
+}
+.viewrecentpost a{
+    margin-right: 10px;
 }
 
 
@@ -45,5 +49,11 @@
 }
 
 .post_textsize{
-    font-size: 14px;
+    font-size: 13px;
+    display: block;
+}
+
+#recenttopics,#trendingtopicslist{
+    overflow-y: auto;
+    max-height: 500px;
 }

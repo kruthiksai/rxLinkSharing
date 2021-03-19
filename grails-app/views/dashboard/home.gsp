@@ -35,16 +35,18 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#createtopic"><i class="fa fa-comments fa-lg"
-                                                                         aria-hidden="true"></i></a>
+                    <a class="nav-link " aria-current="page" href="#" data-bs-toggle="modal"
+                       data-bs-target="#createtopic"><i class="fa fa-comments fa-lg"
+                                                        aria-hidden="true"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i></a>
+                    <a class="nav-link" href="#" data-bs-toggle="modal" id="createlinkbtn" data-bs-target="#addlinks"><i
+                            class="fa fa-paperclip fa-lg" aria-hidden="true"></i></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" href="#" data-bs-toggle="modal" id="createdocbtn" data-bs-target="#adddocument">
                     <a class="nav-link" href="#"><i class="fa fa-file fa-lg" aria-hidden="true"></i></a>
                 </li>
                 <li class="nav-item dropdown ">
@@ -114,152 +116,7 @@
                 </div>
             </div>
 
-            <!-- recents topics -->
-            %{--            <div class="card margin10px">--}%
-            %{--                <div class="card-header d-flex justify-content-between">--}%
-            %{--                    <span>--}%
-            %{--                        Subscriptions--}%
-            %{--                    </span>--}%
-            %{--                    <span>--}%
-            %{--                        <button type="button" class="btn-sm btn-outline-dark">view all</button>--}%
-            %{--                    </span>--}%
-            %{--                </div>--}%
-            %{--                <div class="card-body">--}%
-            %{--                    <div class="card ">--}%
-            %{--                        <div class="card-body" style="position: relative;">--}%
-            %{--                            <div class="container-fluid recentcontent">--}%
-            %{--                                <div class="row">--}%
-            %{--                                    <div class="col-sm-3">--}%
-            %{--                                        <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image">--}%
-            %{--                                    </div>--}%
-            %{--                                    <div class="col-sm-9" style="position: relative;">--}%
-            %{--                                        <a class="card-text"> grails </a>--}%
-            %{--                                        <div class="row">--}%
-            %{--                                            <div class="col-sm-4">--}%
-            %{--                                                <strong class="card-text post_textsize">@kruthik</strong>--}%
-            %{--                                                <a class="card-text post_textsize"> unsubscribe </a>--}%
-            %{--                                            </div>--}%
-            %{--                                            <div class="col-sm-5">--}%
-            %{--                                                <strong class="post_textsize">Subscriptions</strong>--}%
-            %{--                                                <p>--}%
-            %{--                                                    50--}%
-            %{--                                                </p>--}%
-            %{--                                            </div>--}%
-            %{--                                            <div class="col-sm-3">--}%
-            %{--                                                <strong class="post_textsize">post</strong>--}%
-            %{--                                                <p>--}%
-            %{--                                                    50--}%
-            %{--                                                </p>--}%
-            %{--                                            </div>--}%
-            %{--                                        </div>--}%
 
-            %{--                                        <!-- <a href="#" class="btn btn-primary viewrecentpost"> View Post</a> -->--}%
-            %{--                                    </div>--}%
-            %{--                                </div>--}%
-            %{--                                <div class="row">--}%
-            %{--                                    <div class="col-sm-4">--}%
-            %{--                                        <select class="form-select" aria-label="Default select example">--}%
-            %{--                                            <option selected>Serious</option>--}%
-            %{--                                            <option value="1">Not Serious</option>--}%
-            %{--                                        </select>--}%
-            %{--                                    </div>--}%
-            %{--                                    <div class="col-sm-4">--}%
-            %{--                                        <select class="form-select" aria-label="Default select example">--}%
-            %{--                                            <option selected>private</option>--}%
-            %{--                                            <option value="1">public</option>--}%
-            %{--                                        </select>--}%
-            %{--                                    </div>--}%
-            %{--                                    <div class="col-sm-4">--}%
-            %{--                                        <div class="row">--}%
-            %{--                                            <div class="col-sm-4">--}%
-            %{--                                                <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>--}%
-            %{--                                            </div>--}%
-            %{--                                            <div class="col-sm-4">--}%
-            %{--                                                <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>--}%
-            %{--                                            </div>--}%
-            %{--                                            <div class="col-sm-4">--}%
-            %{--                                                <i class="fa fa-trash fa-lg" aria-hidden="true"></i>--}%
-            %{--                                            </div>--}%
-
-            %{--                                        </div>--}%
-            %{--                                    </div>--}%
-            %{--                                </div>--}%
-            %{--                            </div>--}%
-
-
-
-            %{--                        </div>--}%
-            %{--                    </div>--}%
-            %{--                    <div class="card ">--}%
-            %{--                        <div class="card-body" style="position: relative;">--}%
-            %{--                            <div class="container-fluid recentcontent">--}%
-            %{--                                <div class="row">--}%
-            %{--                                    <div class="col-sm-3">--}%
-            %{--                                        <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image">--}%
-            %{--                                    </div>--}%
-            %{--                                    <div class="col-sm-9" style="position: relative;">--}%
-            %{--                                        <a class="card-text"> grails </a>--}%
-            %{--                                        <div class="row">--}%
-            %{--                                            <div class="col-sm-4">--}%
-            %{--                                                <strong class="card-text post_textsize">@kruthik</strong>--}%
-            %{--                                                <a class="card-text post_textsize"> unsubscribe </a>--}%
-            %{--                                            </div>--}%
-            %{--                                            <div class="col-sm-5">--}%
-            %{--                                                <strong class="post_textsize">Subscriptions</strong>--}%
-            %{--                                                <p>--}%
-            %{--                                                    50--}%
-            %{--                                                </p>--}%
-            %{--                                            </div>--}%
-            %{--                                            <div class="col-sm-3">--}%
-            %{--                                                <strong class="post_textsize">post</strong>--}%
-            %{--                                                <p>--}%
-            %{--                                                    50--}%
-            %{--                                                </p>--}%
-            %{--                                            </div>--}%
-            %{--                                        </div>--}%
-
-            %{--                                        <!-- <a href="#" class="btn btn-primary viewrecentpost"> View Post</a> -->--}%
-            %{--                                    </div>--}%
-            %{--                                </div>--}%
-            %{--                                <div class="row">--}%
-            %{--                                    <div class="col-sm-4">--}%
-            %{--                                        <select class="form-select" aria-label="Default select example">--}%
-            %{--                                            <option selected>Serious</option>--}%
-            %{--                                            <option value="1">Not Serious</option>--}%
-            %{--                                        </select>--}%
-            %{--                                    </div>--}%
-            %{--                                    <div class="col-sm-4">--}%
-            %{--                                        <select class="form-select" aria-label="Default select example">--}%
-            %{--                                            <option selected>private</option>--}%
-            %{--                                            <option value="1">public</option>--}%
-            %{--                                        </select>--}%
-            %{--                                    </div>--}%
-            %{--                                    <div class="col-sm-4">--}%
-            %{--                                        <div class="row">--}%
-            %{--                                            <div class="col-sm-4">--}%
-            %{--                                                <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>--}%
-            %{--                                            </div>--}%
-            %{--                                            <div class="col-sm-4">--}%
-            %{--                                                <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>--}%
-            %{--                                            </div>--}%
-            %{--                                            <div class="col-sm-4">--}%
-            %{--                                                <i class="fa fa-trash fa-lg" aria-hidden="true"></i>--}%
-            %{--                                            </div>--}%
-
-            %{--                                        </div>--}%
-            %{--                                    </div>--}%
-            %{--                                </div>--}%
-            %{--                            </div>--}%
-
-
-
-            %{--                        </div>--}%
-            %{--                    </div>--}%
-
-
-
-            %{--                </div>--}%
-            %{--            </div>--}%
             <div class="card margin10px">
                 <div class="card-header d-flex justify-content-between">
                     <span>
@@ -269,11 +126,12 @@
                         <button type="button" class="btn-sm btn-outline-dark">view all</button>
                     </span>
                 </div>
-                %{--                <g:render template="/templates/subscriptionDetails"></g:render>--}%
-                <div id="recenttopics">
 
+                <div id="recenttopics">
+                    %{--                    <g:render template="subscriptionDetails"></g:render>--}%
                 </div>
             </div>
+
             <!-- recent posts -->
             <div class="card margin10px">
                 <div class="card-header d-flex justify-content-between">
@@ -284,8 +142,13 @@
                         <button type="button" class="btn-sm btn-outline-dark viewall">view all</button>
                     </span>
                 </div>
-                <g:render template="/templates/subscriptionDetails"
+            <div id="trendingtopicslist">
+                <g:render template="subscriptionDetails"
                           model="[trendingTopics1: trendingTopics]"></g:render>
+            </div>
+
+                %{--                <g:render template="/templates/subscriptionDetails"--}%
+                %{--                          model="[trendingTopics1: trendingTopics]"></g:render>--}%
             </div>
             <!-- trending topics  same as subcriptions-->
 
@@ -298,50 +161,10 @@
             <div class="card">
                 <div class="card-header">Top Posts</div>
 
-                <div class="card-body">
-                    <div class="card margin10px">
-                        <div class="card-body" style="position: relative;">
-                            <div class="container-fluid recentcontent">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <img class="card-img-top"
-                                             src="https://www.w3schools.com/bootstrap4/img_avatar1.png"
-                                             alt="Card image">
-                                    </div>
+                <div class="card-body" id="topposts">
 
-                                    <div class="col-sm-9" style="position: relative;">
-                                        <h4 class="card-title">John Doe</h4>
 
-                                        <p class="card-text" style="margin-bottom:60px;"></p>
-                                        <a href="#" class="btn btn-primary viewrecentpost">View Post</a>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                    </div>
-
-                    <div class="card" style="margin: 10px; ">
-                        <div class="card-body" style="position: relative;">
-                            <div class="container-fluid recentcontent">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <img class="card-img-top"
-                                             src="https://www.w3schools.com/bootstrap4/img_avatar1.png"
-                                             alt="Card image">
-                                    </div>
-
-                                    <div class="col-sm-9" style="position: relative;">
-                                        <h4 class="card-title">John Doe</h4>
-
-                                        <p class="card-text" style="margin-bottom:60px;"></p>
-                                        <a href="#" class="btn btn-primary viewrecentpost">View Post</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
 
                 </div>
             </div>
@@ -390,7 +213,6 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Invite</button>
 
-
             </div>
         </div>
     </div>
@@ -435,8 +257,82 @@
 </div>
 
 
+%{--add documents--}%
+<div class="modal fade" id="addlinks" tabindex="-1" aria-labelledby="Add Link To Topic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="urllinkhead">Url Sharing</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
+            <div class="modal-body">
+                <g:form method="post">
+                    <div class="form-group">
+                        <label for="urllink">Url</label>
+                        <input type="text" name="name" class="form-control" id="urllink" name="urllink"
+                               placeholder="@grails">
+                    </div>
 
+                    <div class="form-group">
+                        <label for="linkdescription">Description</label>
+                        <textarea class="form-control" id="linkdescription" name="linkdescription" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="selecttopic">Select Topic</label>
+                        <select class="form-control " name="selectedTopicName" id="selecttopic">
+
+                        </select>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="addpost" class="btn btn-primary">Primary</button>
+                </g:form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+%{--upload document links--}%
+
+<div class="modal fade" id="adddocument" tabindex="-1" aria-labelledby="Add Link To Topic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="documenthead">Document Sharing</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <g:form method="post">
+                    <div class="form-group">
+                        <label for="urllink">Url</label>
+                        <input type="text" name="name" class="form-control" id="doc" name="urllink"
+                               placeholder="@grails">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="docdescription">Description</label>
+                        <textarea class="form-control" id="docdescription" name="docdescription" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="selectdoctopic">Select Topic</label>
+                        <select class="form-control " name="selectedTopicName" id="selectdoctopic">
+
+                        </select>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="adddocpost" class="btn btn-primary">add document</button>
+                </g:form>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <!--bootstrap code-->
 %{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"--}%
@@ -456,7 +352,12 @@
 $(document).ready(function (){
 
 
-populateSubs();
+ recentTopics();
+ $("#addpost").click(createpost);
+
+
+ $("#createlinkbtn,#createdocbtn").click(loadTopicNames);
+
     $(".subscribe,unsubscribe").click(function (){
         var elementContext=this
         subscribe(elementContext)
@@ -464,52 +365,66 @@ populateSubs();
     })
 
 })
+
+function loadTopicNames(){
+
+        $.ajax({
+              url: "http://localhost:8080/dashboard/getTopicNames",
+
+
+               async:false,
+               success: function (result) {
+              console.log(result)
+  $("#selecttopic,#selectdoctopic").find('option').remove().end()
+            //   $(element).innerHTML
+         for (i = 0; i < result.length; i++) {
+
+
+            $("#selecttopic,#selectdoctopic").append("<option>"+result[i]+"</option>")
+         }
+              },
+               error: function () {
+                 alert("Problem finding topics")
+                }
+                 });
+
+}
 // function to show subscribed topics
-function populateSubs(){
+function recentTopics(){
 
 
 
         $.ajax({
-              url: "http://localhost:8080/dashboard/gettrendingtopics",
+              url: "http://localhost:8080/dashboard/recentTopics",
 
             //   data: data,
                async:false,
                success: function (result) {
-                  console.log(result)
-                for (i = 0; i < result.length; i++) {
-                    var topicId=result[i]["id"];
-                     var subsHtml='<div class="card"> <div class="card-body" style="position: relative;"> <div class="container-fluid recentcontent" id ='
-                     +topicId+
-                     '> <div class="row"> <div class="col-sm-3"> <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image"> </div><div class="col-sm-9" style="position: relative;"> <a class="card-text">' +
-                      result[i]["name"] +
-                       '</a> <div class="row"> <div class="col-sm-4"> <strong class="card-text post_textsize">' + '</strong> <a  class="card-text post_textsize subscribe">Subscribe</a> </div><div class="col-sm-5"> <strong class="post_textsize">Subscriptions</strong> <p> 50 </p></div><div class="col-sm-3"> <strong class="post_textsize">post</strong> <p> 50 </p></div></div></div></div><div class="row itemslist"> <div class="col-sm-4"> <select class="form-select" aria-label="Default select example"> <option selected>Serious</option> <option value="1">Not Serious</option> </select> </div>' ;
-                     if(${session.user.id}!=result[i]["user"]["id"]){
-                         subsHtml+='<div class="col-sm-4 "> <select class="form-select" aria-label="Default select example"> <option selected>private</option> <option value="1">public</option> </select> </div><div class="col-sm-4"> <div class="row"> <div class="col-sm-4"> <i class="fa fa-edit fa-lg" aria-hidden="true"></i> </div><div class="col-sm-4"> <i class="fa fa-trash fa-lg" aria-hidden="true"></i> </div>'
-                        }
 
-                        subsHtml+=  '<div class="col-sm-4"> <i class="fa fa-envelope fa-lg" aria-hidden="true"></i> </div></div></div></div></div></div></div>'
-
-                   console.log()
-
-                      $("#recenttopics").append(subsHtml);
-                }
+                   $("#recenttopics").append(result);
 
 
-            //   $(element).innerHTML
-       //     $(element).closest(".recentcontent").find(".itemslist").remove();
-              },
-               error: function () {
-                 alert("no user found")
-                }
-                 });
+
+
+
+    //   $(element).innerHTML
+//     $(element).closest(".recentcontent").find(".itemslist").remove();
+
+
+
+      },
+       error: function () {
+         alert("no user found")
+        }
+         });
 }
 
 
 // function to  subscribe topics
-        function subscribe(element){
+function subscribe(element){
 
-    var data={
-     userid: ${session.user?.id},
+var data={
+userid: ${session.user?.id},
      topicid: $(element).closest(".recentcontent").attr('id')
 
     }
@@ -534,12 +449,62 @@ function populateSubs(){
 
               },
                error: function () {
-                 alert("no user found")
+                 alert("Subscription Failed")
                 }
                  });
 
         }
 
+        function createpost(){
+        var data={
+    userid: ${session.user?.id},
+     topicname: $('#selecttopic option:selected').html(),
+     description:$('#linkdescription').val(),
+     url:$('#urllink').val()
+
+    }
+    console.log($('#selecttopic option:selected').html()+" "+ $('#linkdescription').val()+" "+$('#urllink').val());
+
+    $.ajax({
+              url: "http://localhost:8080/dashboard/addPosts",
+
+               data: data,
+               async:false,
+               success: function (result) {
+              console.log(result)
+                console.log(result)
+            //   $(element).innerHTML
+            if(result=="added"){
+                $('#addlinks').modal('toggle');
+            }
+            if(result=="failed"){
+                 alert("adding post failed")
+            }
+
+              },
+               error: function () {
+                 alert("adding post failed")
+                }
+                 });
+        }
+        function loadPosts(){
+
+                    $.ajax({
+              url: "http://localhost:8080/Posts/getPosts",
+
+
+               async:false,
+               success: function (result) {
+              console.log(result)
+                $("#topposts").append(result)
+
+
+              },
+               error: function () {
+                 alert("Subscription Failed")
+                }
+                 });
+        }
 </g:javascript>
 </body>
 

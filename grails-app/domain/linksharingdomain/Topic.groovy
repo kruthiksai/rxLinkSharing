@@ -1,7 +1,7 @@
 package linksharingdomain
 
 class Topic {
-String name;
+    String name;
     Date dateCreated
     Date lastUpdated
     String  topicShow

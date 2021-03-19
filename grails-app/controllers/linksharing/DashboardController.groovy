@@ -2,6 +2,7 @@ package linksharing
 
 import grails.converters.JSON
 import linksharingCO.TopicCO
+import linksharingdomain.LinkResource
 import linksharingdomain.Subscription
 import linksharingdomain.Topic
 import linksharingdomain.User
@@ -59,12 +60,37 @@ class DashboardController {
     }
 
     def gettrendingtopics() {
-        render(topicsService.trendingTopics() as JSON)
+        render(view:'_subscriptionDetails',model:[trendingTopics: topicsService.trendingTopics()] )
 
     }
     def fetchTopics(){
 
         render (topicsService.fetchTopics() as JSON)
+    }
+
+    def recentTopics(){
+        render(view:'_subscriptionDetails',model:[trendingTopics: topicsService.recenttopics()] )
+    }
+
+    def getTopicNames() {
+        render (topicsService.getTopicNames(session.user.id) as JSON)
+    }
+
+    def addPosts (){
+        Topic topic=Topic.findByName(params.topicname)
+        User user=User.findById(params.userid.toLong())
+
+        if(topicsService.addPost(topic,user,params.url,params.description)){
+            render("added")
+        }else{
+            render("failed")
+        }
+
+
+    }
+
+    def getInboxPosts(){
+        render(topicsService.getInboxPosts(session.user.id))
     }
 
 }

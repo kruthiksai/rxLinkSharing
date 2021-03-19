@@ -2,7 +2,7 @@ package linksharingdomain
 
 class DocumentResource {
     String documentUrl;
-  static belongsto=[resources:Resource];
+  static belongsTo=[resources:Resource];
 
     static constraints ={
 

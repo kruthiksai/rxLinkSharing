@@ -29,6 +29,6 @@ static hasMany=[topic:Topic, subscription:Subscription, resouces:Resource, readT
     }
 
     static mapping = {//    datasource()
-        table 'users'}
+        table 'user_table'}
 
 }

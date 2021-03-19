@@ -39,7 +39,7 @@
                     <div class="container-fluid recentcontent">
                         <div class="row">
                             <div class="col-sm-4">
-                                <g:img class="card-img-top" dir="images" file="${session.user.photoUrl}"  alt="Card image"/>
+                                <g:img  class="card-img-top col-sm-12" dir="images" file="${session.user.photoUrl}"  alt="Card image"/>
                             </div>
 
                             <div class="col-sm-8" style="position: relative;">
