@@ -55,5 +55,10 @@
 
 #recenttopics,#trendingtopicslist{
     overflow-y: auto;
-    max-height: 500px;
+    max-height: 40vh;
+}
+
+#topposts{
+    overflow-y: auto;
+    max-height: 115vh;
 }

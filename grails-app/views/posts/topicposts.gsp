@@ -129,7 +129,7 @@
                                         <strong class="post_textsize">Subscriptions</strong>
 
                                         <p>
-                                            50
+                                            ${topicDetails.subscription.user.subscription.size()}
                                         </p>
                                     </div>
 
@@ -137,7 +137,7 @@
                                         <strong class="post_textsize">post</strong>
 
                                         <p>
-                                            50
+                                            ${topicDetails.resources.size()}
                                         </p>
                                     </div>
                                 </div>
@@ -209,9 +209,17 @@
         </div>
 
         <div class="col-sm-7">
-           <div id="posts">
 
-           </div>
+
+
+            <div class="card">
+                <div class="card-header">Posts of  ${topicDetails.name}
+                    <input style="float: right" id="myInput" type="text" placeholder="Search.."></div>
+                <div class="card-body" id="posts">
+
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -233,6 +241,14 @@ $(document).ready(function (){
 loadPosts();
  loadUsers();
 console.log()
+
+     $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#posts .postscard").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+
 
  //
  // $("#createlinkbtn").click(loadTopicNames);
@@ -256,7 +272,7 @@ console.log()
 %{--    }--}%
 
 %{--    $.ajax({--}%
-%{--              url: "http://localhost:8080/dashboard/subscribetopic",--}%
+%{--              url: "http://localhost:8090/dashboard/subscribetopic",--}%
 
 %{--               data: data,--}%
 %{--               async:false,--}%
@@ -288,12 +304,12 @@ console.log()
 
     }
                     $.ajax({
-              url: "http://localhost:8080/posts/getUsersByTopic",
+              url: "http://localhost:8090/posts/getUsersByTopic",
 
                data: data,
                async:false,
                success: function (result) {
-              console.log(result)
+          //    console.log(result)
                 $("#usersOfTopic").append(result)
 
 
@@ -311,13 +327,24 @@ console.log()
 
     }
                     $.ajax({
-              url: "http://localhost:8080/Posts/getPosts",
+              url: "http://localhost:8090/Posts/getPosts",
 
                data: data,
                async:false,
                success: function (result) {
-              console.log(result)
-                $("#posts").append(result)
+              console.log(result.length<=5)
+
+         $("#posts").append(result)
+
+             if(result.length<=5){
+                  $("#posts").append("<div style=' text-align: center; margin-top:50px;';>No Posts found for this topic </div>")
+
+             }
+
+
+
+
+
 
 
               },

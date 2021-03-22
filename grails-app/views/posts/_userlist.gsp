@@ -16,7 +16,7 @@
                             <strong>Subscriptions</strong>
 
                             <p>
-                                50
+                                ${users?.subscription.size()}
                             </p>
                         </div>
 
@@ -24,7 +24,7 @@
                             <strong>Topics</strong>
 
                             <p>
-                                50
+                                ${users?.topic.size()}
                             </p>
                         </div>
                     </div>

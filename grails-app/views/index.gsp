@@ -5,6 +5,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <asset:stylesheet src="index.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>Welcome to Grails</title>
 </head>
 
@@ -36,38 +39,75 @@
 
             <g:render template="/templates/RecentShares"></g:render>
             <!-- recent posts -->
-            <g:render template="/templates/TopPosts" model="[trendingTopics: trendingTopics]"></g:render>
+            <div class="card margin10px" >
+                <div class="card-header d-flex justify-content-between">
+                    <span>
+                        Recent Shares
+                    </span>
 
+                </div>
+            <div id="recentshares">
+
+%{--                <g:render template="/templates/TopPosts"></g:render>--}%
+            </div>
         </div>
-        <!--Authentication -->
-        <div class=" col-sm-4 margin10px">
 
 
-            <div class="message" style="display: block">${flash.message}</div>
-            <div class="card">
-                <div class="card-header">Login</div>
+    </div>
+    <!--Authentication -->
+    <div class=" col-sm-4 margin10px">
 
-                <div class="card-body">
-                    <g:form url="[controller: 'user', action: 'loginuser']" method="post">
-                        <div class="mb-2">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp">
+        <div class="message" style="display: block">${flash.message}</div>
 
-                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        <div class="card">
+            <div class="card-header">Login</div>
+
+            <div class="card-body">
+                <g:form url="[controller: 'user', action: 'loginuser']" method="post">
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                               aria-describedby="emailHelp">
+
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+                    </div>
+
+
+
+                    <g:actionSubmit value="loginuser" class="btn btn-primary">Login</g:actionSubmit>
+
+                </g:form>
+                <div style="text-align: center">
+                    <a data-bs-toggle="collapse"
+                       data-bs-target="#forgotPasswordCollapse" aria-expanded="false"
+                       aria-controls="forgotPasswordCollapse">forgot password</a>
+                </div>
+
+                <div class="collapse" id="forgotPasswordCollapse">
+                    <div class="card card-body">
+                        <div class="form-row">
+                            <g:form name="forgotPasswordForm" controller="user" action="forgotPassword"
+                                    method="post">
+
+                                <div class="form-group ">
+                                    <label for="forgotPassEmail">Email</label>
+                                    <input required required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                           type="email" name="email" class="form-control" id="forgotPassEmail"
+                                           placeholder="Email">
+                                </div>
+
+                                <g:actionSubmit value="forgotPassword" name="forgotPassword" controller="user"
+                                                action="forgotPassword"
+                                                class="btn btn-primary margin10px">Sign in</g:actionSubmit>
+                            </g:form>
                         </div>
+                    </div>
 
-                        <div class="mb-2">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" id="exampleInputPassword1">
-                        </div>
-
-                        <div class="mb-2 form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
-                        <g:actionSubmit value="loginuser" class="btn btn-primary">Login</g:actionSubmit>
-                    </g:form>
                 </div>
             </div>
 
@@ -95,14 +135,16 @@
 
                             <div class="form-group ">
                                 <label for="inputPassword5">Confirm Password</label>
-                                <input type="password" name="confirmPassword" class="form-control" id="inputPassword5"
+                                <input type="password" name="confirmPassword" class="form-control"
+                                       id="inputPassword5"
                                        placeholder="Confirm Password">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" name="userName" class="form-control" id="username" placeholder="kk1611">
+                            <input type="text" name="userName" class="form-control" id="username"
+                                   placeholder="kk1611">
                         </div>
 
                         <div class="form-group">
@@ -123,6 +165,7 @@
                     </g:form>
                 </div>
             </div>
+
         </div>
 
     </div>
@@ -132,9 +175,9 @@
 </div>
 
 <!--bootstrap code-->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+%{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"--}%
+%{--        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"--}%
+%{--        crossorigin="anonymous"></script>--}%
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
         integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
         crossorigin="anonymous"></script>
@@ -142,6 +185,41 @@
         integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
         crossorigin="anonymous"></script>
 
+
+<g:javascript>
+
+    $(document).ready(function () {
+
+
+        getrecentposts();
+
+    })
+
+    // function to show subscribed topics
+    function getrecentposts() {
+        console.log("kruthik")
+
+
+        $.ajax({
+            url: "http://localhost:8090/user/getIndexRecentPosts",
+
+            //   data: data,
+            async: false,
+            success: function (result) {
+
+                $("#recentshares").append(result);
+
+
+            },
+            error: function () {
+                alert("could not load recent posts")
+            }
+        });
+    }
+
+
+
+</g:javascript>
 
 <div id="content" role="main">
     <section class="row colset-2-its">

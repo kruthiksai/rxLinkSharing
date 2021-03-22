@@ -52,4 +52,40 @@
 
 
         }
+
+        def forgotPassword(String email){
+            def user = User.findByEmail(email)
+
+            if(user){
+                def num = Math.abs( new Random().nextInt() % (9999 - 1000) ) + 1000
+                def a = send(num,email)
+               return a
+            }
+            else{
+              return null
+            }
+        }
+        def send(num, email) {
+            sendMail {
+                to "${email}"
+                subject "Forgot Password"
+                text "${num}"
+            }
+          //  flash.message = "Message sent at "+new Date()
+            //redirect action:"index"
+            return num
+        }
+
+        def updatePassword(String password,String email){
+            print(email +" "+ password)
+            User user=User.findByEmail(email)
+            user.password=password;
+            user.save(flush:true)
+
+        }
+        def adminUsersList(){
+        def usersList=User.list()
+            return usersList
+        }
+
     }

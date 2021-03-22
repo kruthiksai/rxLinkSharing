@@ -1,6 +1,7 @@
 package linksharing
 
 import grails.gorm.transactions.Transactional
+import linksharingdomain.ReadItem
 import linksharingdomain.Resource
 import linksharingdomain.Subscription
 import linksharingdomain.Topic
@@ -40,4 +41,20 @@ def subs= Subscription.findByTopicAndUser(Topic.findByName(topicName),User.findB
 
     }
 
+    def getRecentPosts(){
+        def recentPosts=Resource.createCriteria().list {
+
+            topic{
+                eq('topicShow',"public")
+            }
+
+        }
+        return recentPosts
+    }
+
+
+    def makeRead(long uid,long rid){
+        ReadItem readItem=new ReadItem(isRead: true,resources:Resource.findById(uid))
+
+    }
 }

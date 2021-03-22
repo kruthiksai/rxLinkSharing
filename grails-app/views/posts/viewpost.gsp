@@ -118,7 +118,7 @@
 
                                     <a href="#">Download</a>
                                     <a href="#">edit</a>
-                                    <a href="${postsdata.linkResource.url}">View full site</a>
+                                    <a href="${postsdata.linkResource.url}" target="_blank">View full site</a>
                                     <a href="#">Delete</a>
 
                                 </div>
@@ -156,7 +156,7 @@
     $(document).ready(function () {
 
         loadPosts();
-        loadUsers();
+        //loadUsers();
         console.log()
 
         //
@@ -180,7 +180,7 @@
 
         }
         $.ajax({
-            url: "http://localhost:8080/Posts/getPosts",
+            url: "http://localhost:8090/Posts/getPosts",
 
             data: data,
             async: false,

@@ -32,4 +32,6 @@ def getUsersByTopic(){
            render(view:'viewpost')
        }
     }
+
+
 }

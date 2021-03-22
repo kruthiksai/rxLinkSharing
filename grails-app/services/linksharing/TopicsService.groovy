@@ -25,9 +25,9 @@ class TopicsService {
         print(topic.properties);
 
         user.addToTopic(topic)
-        user.save(flush:true,failOnError: true)
+        user.save(flush: true, failOnError: true)
 
-      supbscribeToTopic(id,topic.id)
+        supbscribeToTopic(id, topic.id)
 
         //  print( user.errors.allErrors)
 
@@ -108,8 +108,30 @@ class TopicsService {
         return kk;
     }
 
-    def recenttopics() {
-        return Topic.list(sort: 'dateCreated', order: 'desc', offset: 0, max: 3)
+    def recenttopics(long id) {
+        def topicsList = Subscription.createCriteria().list {
+            projections {
+                topic {
+                    property('id')
+                }
+
+            }
+            eq('user', User.findById(id))
+        }
+        if (topicsList) {
+            return Topic.createCriteria().list(sort: 'dateCreated', order: 'desc', offset: 0, max: 3) {
+
+                or {
+                    // eq('topicShow','public')
+                    'in'("id", topicsList)
+                }
+
+
+            }
+        } else {
+            return null
+        }
+
     }
 
     def getTopicNames(long id) {
@@ -142,7 +164,7 @@ class TopicsService {
 
         LinkResource linkResource = new LinkResource(url: url)
         Resource resource = new Resource(topic: topic, createdBy: user, description: description, linkResource: linkResource);
-        resource.save(flush: true, failOnError: true)
+        //resource.save(flush: true, failOnError: true)
         if (resource.validate()) {
             return resource.save(flush: true, failOnError: true);
 
@@ -171,16 +193,109 @@ class TopicsService {
 
     }
 
-    def getInboxPosts(long id){
-        def subsList=Subscription.createCriteria().list {
-            projections{
+    def getInboxPosts(long id, long offset) {
+        def subsList = Subscription.createCriteria().list() {
+            projections {
                 distinct("topic")
             }
-            eq('user',User.findById(id))
+            eq('user', User.findById(id))
         }
 
-        def postsList=Resource.findAllByTopicInList(subsList)
-        return postsList
+
+        //   def postsList=Resource.findAllByTopicInList(subsList)
+        if (subsList) {
+            def postList = Resource.createCriteria().list(sort: 'dateCreated', order: 'desc', offset: offset, max: 5) {
+                'in'('topic', subsList)
+            }
+            return postList
+        } else {
+            return null
+        }
+
     }
+
+    def deleteTopic(Topic topic) {
+        return Topic.deleteAll(topic);
+
+    }
+
+    def getSubsCount(long id) {
+        User user = User.findById(id);
+        if (user) {
+            return user.subscription.size()
+        } else {
+            return null
+        }
+
+    }
+
+    def getTopicCount(long id) {
+        User user = User.findById(id)
+        if (user) {
+            return user.topic.size()
+        } else {
+            return null
+        }
+
+    }
+
+    def getUserTopics(Long id) {
+        def topicsList = Topic.findAllByUser(User.findById(id))
+
+        if (topicsList) {
+            return topicsList
+        } else {
+            return null
+        }
+    }
+
+    def getTrendingTopics(long id) {
+        def TrendingTopics = Subscription.createCriteria().list(offset: 0, max: 3) {
+            projections {
+                groupProperty("topic")
+                count("topic", 'myCount')
+
+                //Implicit alias is created here !
+            }
+            order 'myCount', "desc"
+
+            topic {
+                or {
+                    eq('topicShow', 'public')
+                    eq('user', User.findById(id))
+
+                }
+
+            }
+
+        }
+    }
+
+  def retreiveList(long id){
+      def topicsList = Subscription.createCriteria().list {
+          projections {
+              topic {
+                  property('id')
+              }
+
+          }
+          eq('user', User.findById(id))
+      }
+      if (topicsList) {
+          return Topic.createCriteria().list() {
+
+              or {
+                  // eq('topicShow','public')
+                  'in'("id", topicsList)
+              }
+
+
+          }
+      } else {
+          return null
+      }
+
+  }
+
 
 }

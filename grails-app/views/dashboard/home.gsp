@@ -20,7 +20,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid ">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Link Sharing</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -56,7 +56,8 @@
                     </a>
                     <ul class="dropdown-menu home-dropdown " aria-labelledby="navbarDropdown">
                         <g:link controller="user" action="openprofile" class="dropdown-item">profile</g:link>
-                        <li><a class="dropdown-item" href="#">users</a></li>
+                        %{--                        <li><a class="dropdown-item" href="#">users</a></li>--}%
+                        <g:link controller="user" action="adminUsersList" class="dropdown-item">users</g:link>
                         <li><a class="dropdown-item" href="#">topics</a></li>
                         <li><a class="dropdown-item" href="#">posts</a></li>
                         <li>
@@ -84,8 +85,9 @@
                     <div class="container-fluid recentcontent">
                         <div class="row">
                             <div class="col-sm-4">
-                                <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png"
-                                     alt="Card image">
+                                <g:img class="card-img-top col-sm-12" dir="images" file="${session.user.photoUrl}"
+                                       alt="Card image"/>
+
                             </div>
 
                             <div class="col-sm-8" style="position: relative;">
@@ -97,7 +99,7 @@
                                         <strong>Subscriptions</strong>
 
                                         <p>
-                                            50
+                                            ${subsList}
                                         </p>
                                     </div>
 
@@ -105,7 +107,7 @@
                                         <strong>Topics</strong>
 
                                         <p>
-                                            50
+                                            ${topicCount}
                                         </p>
                                     </div>
                                 </div>
@@ -123,7 +125,7 @@
                         Subscriptions
                     </span>
                     <span>
-                        <button type="button" class="btn-sm btn-outline-dark">view all</button>
+                        <g:link type="button" action="topicsList" class="btn-sm btn-outline-dark">view all</g:link>
                     </span>
                 </div>
 
@@ -136,16 +138,17 @@
             <div class="card margin10px">
                 <div class="card-header d-flex justify-content-between">
                     <span>
-                        Trending Posts
+                        Trending Topics
                     </span>
                     <span>
                         <button type="button" class="btn-sm btn-outline-dark viewall">view all</button>
                     </span>
                 </div>
-            <div id="trendingtopicslist">
-                <g:render template="subscriptionDetails"
-                          model="[trendingTopics1: trendingTopics]"></g:render>
-            </div>
+
+                <div id="trendingtopicslist">
+                    %{--                    <g:render template="subscriptionDetails"--}%
+                    %{--                              model="[trendingTopics1: trendingTopics]"></g:render>--}%
+                </div>
 
                 %{--                <g:render template="/templates/subscriptionDetails"--}%
                 %{--                          model="[trendingTopics1: trendingTopics]"></g:render>--}%
@@ -159,12 +162,10 @@
         <div class="col-sm-7 margin10px">
 
             <div class="card">
-                <div class="card-header">Top Posts</div>
+                <div class="card-header">Inbox
+                    <input style="float: right" id="myInput" type="text" placeholder="Search.."></div>
 
                 <div class="card-body" id="topposts">
-
-
-
 
                 </div>
             </div>
@@ -176,9 +177,7 @@
     </div>
 </div>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-</button>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -218,10 +217,6 @@
     </div>
 </div>
 %{--create topic--}%
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createtopic">
-    Create topic
-</button>
 
 <div class="modal fade" id="createtopic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -306,11 +301,10 @@
             </div>
 
             <div class="modal-body">
-                <g:form method="post">
+                <g:form controller="dashboard" action="saveDoc" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="urllink">Url</label>
-                        <input type="text" name="name" class="form-control" id="doc" name="urllink"
-                               placeholder="@grails">
+                        <label for="doc">Document :</label>
+                        <input type="file" name="filePath" class="form-control" id="doc" name="urllink">
                     </div>
 
                     <div class="form-group">
@@ -326,7 +320,8 @@
                     </div>
 
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="adddocpost" class="btn btn-primary">add document</button>
+                    <g:actionSubmit controller="dashboard" value="share" class="btn btn-primary" name="saveDoc"
+                                    action="saveDoc"/>
                 </g:form>
             </div>
 
@@ -352,8 +347,17 @@
 $(document).ready(function (){
 
 
+    loadPosts();
  recentTopics();
  $("#addpost").click(createpost);
+
+ trendingTopicsList()
+
+$(".deletetopic").click(function (){
+    console.log("clicked")
+    var elementContext=this
+    deleteTopic(elementContext);
+})
 
 
  $("#createlinkbtn,#createdocbtn").click(loadTopicNames);
@@ -364,17 +368,38 @@ $(document).ready(function (){
 
     })
 
+
+$('#topposts').bind('scroll', function(){
+   if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight){
+      loadPosts();
+   }
+});
+
+    // search inside  inbox posts
+     $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#topposts .postscard").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+
+         $(".markread").click(function (){
+        var elementContext=this
+       markAsRead(elementContext)
+
+    })
+
 })
 
 function loadTopicNames(){
 
         $.ajax({
-              url: "http://localhost:8080/dashboard/getTopicNames",
+              url: "http://localhost:8090/dashboard/getTopicNames",
 
 
                async:false,
                success: function (result) {
-              console.log(result)
+             // console.log(result)
   $("#selecttopic,#selectdoctopic").find('option').remove().end()
             //   $(element).innerHTML
          for (i = 0; i < result.length; i++) {
@@ -395,7 +420,7 @@ function recentTopics(){
 
 
         $.ajax({
-              url: "http://localhost:8080/dashboard/recentTopics",
+              url: "http://localhost:8090/dashboard/recentTopics",
 
             //   data: data,
                async:false,
@@ -407,8 +432,29 @@ function recentTopics(){
 
 
 
-    //   $(element).innerHTML
-//     $(element).closest(".recentcontent").find(".itemslist").remove();
+      },
+       error: function () {
+         alert("no user found")
+        }
+         });
+}
+
+
+//function to get trending topics
+function trendingTopicsList(){
+
+
+
+        $.ajax({
+              url: "http://localhost:8090/dashboard/geTrendingTopics",
+
+            //   data: data,
+               async:false,
+               success: function (result) {
+
+                   $("#trendingtopicslist").append(result);
+
+
 
 
 
@@ -418,8 +464,6 @@ function recentTopics(){
         }
          });
 }
-
-
 // function to  subscribe topics
 function subscribe(element){
 
@@ -430,13 +474,13 @@ userid: ${session.user?.id},
     }
 
     $.ajax({
-              url: "http://localhost:8080/dashboard/subscribetopic",
+              url: "http://localhost:8090/dashboard/subscribetopic",
 
                data: data,
                async:false,
                success: function (result) {
-              console.log(result)
-                console.log(data.topicid + " "+data.userid)
+           //   console.log(result)
+             //   console.log(data.topicid + " "+data.userid)
             //   $(element).innerHTML
             if(result=="success"){
                 $(element).closest(".recentcontent").find(".itemslist").show();
@@ -463,16 +507,16 @@ userid: ${session.user?.id},
      url:$('#urllink').val()
 
     }
-    console.log($('#selecttopic option:selected').html()+" "+ $('#linkdescription').val()+" "+$('#urllink').val());
+  //  console.log($('#selecttopic option:selected').html()+" "+ $('#linkdescription').val()+" "+$('#urllink').val());
 
     $.ajax({
-              url: "http://localhost:8080/dashboard/addPosts",
+              url: "http://localhost:8090/dashboard/addPosts",
 
                data: data,
                async:false,
                success: function (result) {
-              console.log(result)
-                console.log(result)
+            //  console.log(result)
+
             //   $(element).innerHTML
             if(result=="added"){
                 $('#addlinks').modal('toggle');
@@ -489,13 +533,19 @@ userid: ${session.user?.id},
         }
         function loadPosts(){
 
+         var data={
+    offset: $("#topposts .postscard").length
+
+
+    }
+    console.log($("#topposts .postscard").length)
+
                     $.ajax({
-              url: "http://localhost:8080/Posts/getPosts",
-
-
+              url: "http://localhost:8090/dashboard/getInboxPosts",
+               data: data,
                async:false,
                success: function (result) {
-              console.log(result)
+              //F   console.log(result)
                 $("#topposts").append(result)
 
 
@@ -505,6 +555,82 @@ userid: ${session.user?.id},
                 }
                  });
         }
+
+       function deleteTopic(element){
+    var eid=$(element).closest(".recentcontent").attr('id')
+    var data={
+
+     topicid: eid
+
+    }
+
+    $.ajax({
+              url: "http://localhost:8090/dashboard/deleteTopic",
+
+               data: data,
+               async:false,
+               success: function (result) {
+              console.log(result)
+
+            //   $(element).innerHTML
+            if(result=="success"){
+               console.log( $("#recenttopics #"+eid).length)
+                console.log( $("#trendingtopicslist #"+eid).length)
+                if($("#recenttopics #"+eid).length>0){
+                     $("#recenttopics").empty()
+                recentTopics()
+                }
+                if($("#trendingtopicslist #"+eid).length>0){
+                       $("#trendingtopicslist").empty()
+                trendingTopicsList()
+                }
+
+            }
+            if(result=="fail"){
+                 // $(element).closest(".recentcontent").find(".itemslist").hide();
+                 //   $(element).text("subscribe")
+            }
+
+              },
+               error: function () {
+                 alert("Deletion Failed")
+                }
+                 });
+       }
+
+       function markAsRead(element){
+         console.log($(element).closest(".postscard").attr('id'))
+var data={
+userid: ${session.user?.id},
+     rId:$(element).closest(".postscard").attr('id')
+
+    }
+
+    $.ajax({
+              url: "http://localhost:8090/dashboard/readItem",
+
+               data: data,
+               async:false,
+               success: function (result) {
+              console.log(result)
+             //   console.log(data.topicid + " "+data.userid)
+            //   $(element).innerHTML
+            // if(result=="success"){
+            //     $(element).closest(".recentcontent").find(".itemslist").show();
+            //     $(element).text("unsubscribe")
+            // }
+            // if(result=="deleted"){
+            //      $(element).closest(".recentcontent").find(".itemslist").hide();
+            //        $(element).text("subscribe")
+            // }
+
+              },
+               error: function () {
+                 alert("marking failed")
+                }
+                 });
+
+       }
 </g:javascript>
 </body>
 

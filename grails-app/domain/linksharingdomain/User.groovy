@@ -7,6 +7,7 @@ class User {
     String firstName
     String lastName
     String photoUrl
+    boolean admin
     boolean deleted
     Date dateCreated
     Date lastUpdated
@@ -23,6 +24,7 @@ static hasMany=[topic:Topic, subscription:Subscription, resouces:Resource, readT
         lastName nullable: false, maxsize:255
         photoUrl nullable: true, maxsize:255
         deleted nullable: false, maxsize:255
+         admin nullable: true
 //        dateCreated nullable: false, maxsize:255
 //        lastUpdated nullable: true, maxsize:255
 

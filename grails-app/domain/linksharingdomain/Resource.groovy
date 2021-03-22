@@ -12,6 +12,7 @@ class Resource {
 
         description nullable: false,maxsize:255
         documentresource nullable: true
+        linkResource nullable: true
         resourceRating nullable: true
     }
 
